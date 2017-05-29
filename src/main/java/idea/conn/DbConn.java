@@ -1,7 +1,7 @@
 /**
  * Summary:
  * Copyright: (c) 2017. All rights reserved.
- * Licence: This software may be copied and used freely for any purpose but business.
+ * Licence: This software may be copied and used freely for any purpose.
  * Requires: JDK 1.6+
  */
 package idea.conn;
