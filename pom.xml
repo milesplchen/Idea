@@ -31,5 +31,10 @@
     	<artifactId>commons-math3</artifactId>
     	<version>3.6.1</version>
     </dependency>
+    <dependency>
+    	<groupId>org.apache.tomcat</groupId>
+    	<artifactId>tomcat-jdbc</artifactId>
+    	<version>8.5.15</version>
+    </dependency>
   </dependencies>
 </project>

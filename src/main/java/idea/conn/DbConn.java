@@ -89,6 +89,28 @@ public class DbConn {
 	public void connect() throws ClassNotFoundException, SQLException {
 		Class.forName(driver);
 		con = DriverManager.getConnection(url, usr, pw);
+		createStatement();
+	}
+
+	/**
+	 * 利用取得的 Connection 創建 Statement.
+	 *
+	 * @param con Connection
+	 * @throws SQLException 創建 statement 錯誤
+	 */
+	public void connect(Connection con) throws SQLException {
+		this.con = con;
+		createStatement();
+	}
+
+	/**
+	 * 創建 Statement.
+	 * 設定 ResultSet 可跳至最後一列.
+	 * 不可利用 ResultSet 操作資料庫.
+	 *
+	 * @throws SQLException  創建 statement 錯誤
+	 */
+	protected void createStatement() throws SQLException {
 		stat = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 	}
 
