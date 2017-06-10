@@ -22,5 +22,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="D:/JavaLibs/libsvm-3.22/java/libsvm.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

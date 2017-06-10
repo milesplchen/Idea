@@ -15,8 +15,11 @@ import java.util.regex.*;
  * @author Miles Chen
  */
 public class StringUtil {
+	/** MD5 編碼. */
+	public final static String MD5 = "MD5";
+
 	/** 正規表示式. */
-	Pattern pattern;
+	protected Pattern pattern;
 
 	/**
 	 * 移除字串中的 URL.
