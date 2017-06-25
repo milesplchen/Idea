@@ -16,8 +16,11 @@ public class Series {
 	 * 將序列正規化至 0 ~ 1.
 	 *
 	 * @param x 序列
+	 * @return 正規化後的序列
 	 */
-	public static void normalize(double x[]) {
+	public static double[] normalize(double x[]) {
+		double ans[] = new double[x.length];
+
 		double max = 0;
 		for (int i = 0; i < x.length; i++)
 			if (x[i] > max)
@@ -25,7 +28,9 @@ public class Series {
 
 		if (max > 0)
 			for (int i = 0; i < x.length; i++)
-				x[i] /= max;
+				ans[i] = x[i] / max;
+
+		return ans;
 	}
 
 	/**
@@ -84,5 +89,32 @@ public class Series {
 			z[i] = (x[i] - avg) / sd;
 
 		return z;
+	}
+
+	/**
+	 * 計算 mean square error.
+	 *
+	 * @param x 序列
+	 * @param y 序列
+	 * @return mean square error
+	 */
+	public static double meanSquareError(double[] x, double[] y) {
+		double err = 0;
+
+		for (int i = 0; i < x.length; i++)
+			err += Math.pow(x[i] - y[i], 2);
+
+		return err / x.length;
+	}
+
+	/**
+	 * 計算 root mean square error.
+	 *
+	 * @param x 序列
+	 * @param y 序列
+	 * @return root mean square error
+	 */
+	public static double rootMeanSquareError(double[] x, double[] y) {
+		return Math.sqrt( meanSquareError(x, y) );
 	}
 }

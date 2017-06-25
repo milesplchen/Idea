@@ -9,6 +9,8 @@ package idea.classification;
 import java.io.*;
 import java.util.StringTokenizer;
 
+import idea.math.Statistics;
+
 import libsvm.*;
 
 /**
@@ -169,37 +171,19 @@ public class LibSVM {
 	 * @return accuracy
 	 */
 	public static double performance(int tp, int tn, int fp, int fn) {
-		if (tp + fn == 0 || tn + fp == 0) return 0;
+		double acc = Statistics.accuracy(tp, tn, fp, fn);
+		double pre = Statistics.precision(tp, tn, fp, fn);
+		double recall = Statistics.sensitivity(tp, tn, fp, fn);
+		double spe = Statistics.specificity(tp, tn, fp, fn);
+		double fmeasure = Statistics.fmeasure(1, tp, tn, fp, fn);
 
-		double accuracy = (double)(tp + tn) / (tp + tn + fp + fn) * 100;
-		double precision = (double)tp / (tp + fp) * 100;
-		double sensitivity = (double)tp / (tp + fn) * 100;		// recall
-		double specificity = (double)tn / (tn + fp) * 100;
-		double b = 1;
-		double fmeasure = (1 + b*b) * precision * sensitivity / (b*b * precision + sensitivity);
-
-		System.out.printf("Accuracy = %1.3f%% (%d/%d)\n", accuracy, tp + tn, tp + tn + fp + fn);
-		System.out.printf("Precision = %1.3f%% (%d/%d)\n", precision, tp, tp + fp);
-		System.out.printf("Sensitivity = %1.3f%% (%d/%d)\n", sensitivity, tp, tp + fn);
-		System.out.printf("Specificity = %1.3f%% (%d/%d)\n", specificity, tn, tn + fp);
+		System.out.printf("Accuracy = %1.3f%% (%d/%d)\n", acc * 100, tp + tn, tp + tn + fp + fn);
+		System.out.printf("Precision = %1.3f%% (%d/%d)\n", pre * 100, tp, tp + fp);
+		System.out.printf("Sensitivity = %1.3f%% (%d/%d)\n", recall * 100, tp, tp + fn);
+		System.out.printf("Specificity = %1.3f%% (%d/%d)\n", spe * 100, tn, tn + fp);
 		System.out.printf("F-measure = %1.3f%%\n", fmeasure);
 
-		return accuracy;
-	}
-
-	/**
-	 * 計算 mean square error.
-	 *
-	 * @param pred 預測結果
-	 * @return mean square error
-	 */
-	public double mse(double[] pred) {
-		double err = 0;
-
-		for (int i = 0; i < prob.l; i++)
-			err += Math.pow(pred[i] - prob.y[i], 2);
-
-		return err / prob.l;
+		return acc;
 	}
 
 	/** 以預設值計算不同參數的準確率. */

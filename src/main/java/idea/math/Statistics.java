@@ -22,6 +22,84 @@ public class Statistics {
 	public static final double Z99 = 2.575;
 
 	/**
+	 * 計算 accuracy.
+	 *
+	 * @param tp true positive 數
+	 * @param tn true negative 數
+	 * @param fp false positive 數
+	 * @param fn false negative 數
+	 * @return accuracy
+	 */
+	public static double accuracy(int tp, int tn, int fp, int fn) {
+		if (tp == 0 || tn == 0 || fp == 0 || fn == 0)
+			return 0;
+		return (double)(tp + tn) / (tp + tn + fp + fn);
+	}
+
+	/**
+	 * 計算 precision.
+	 *
+	 * @param tp true positive 數
+	 * @param tn true negative 數
+	 * @param fp false positive 數
+	 * @param fn false negative 數
+	 * @return precision
+	 */
+	public static double precision(int tp, int tn, int fp, int fn) {
+		if (tp == 0 || fp == 0)
+			return 0;
+		return (double)tp / (tp + fp);
+	}
+
+	/**
+	 * 計算 sensitivity.
+	 *
+	 * @param tp true positive 數
+	 * @param tn true negative 數
+	 * @param fp false positive 數
+	 * @param fn false negative 數
+	 * @return sensitivity
+	 */
+	public static double sensitivity(int tp, int tn, int fp, int fn) {
+		if (tp == 0 || fn == 0)
+			return 0;
+		return (double)tp / (tp + fn);
+	}
+
+	/**
+	 * 計算 specificity.
+	 *
+	 * @param tp true positive 數
+	 * @param tn true negative 數
+	 * @param fp false positive 數
+	 * @param fn false negative 數
+	 * @return specificity
+	 */
+	public static double specificity(int tp, int tn, int fp, int fn) {
+		if (tn == 0 || fp == 0)
+			return 0;
+		return (double)tn / (tn + fp);
+	}
+
+	/**
+	 * 計算 F-measure.
+	 *
+	 * @param b  beta
+	 * @param tp true positive 數
+	 * @param tn true negative 數
+	 * @param fp false positive 數
+	 * @param fn false negative 數
+	 * @return F-measure
+	 */
+	public static double fmeasure(double b, int tp, int tn, int fp, int fn) {
+		double pre = precision(tp, tn, fp, fn);
+		double recall = sensitivity(tp, tn, fp, fn);
+		if (pre == 0 || recall == 0)
+			return 0;
+		return (1 + b * b) * pre * recall / (b * b * pre + recall);
+	}
+
+	/**
 	 * 計算 odds ratio.
 	 *
 	 * @param ee case 中 event 發生的次數
