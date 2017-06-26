@@ -9,7 +9,7 @@ package idea.classification;
 import java.io.*;
 import java.util.StringTokenizer;
 
-import idea.math.Statistics;
+import idea.math.*;
 
 import libsvm.*;
 
