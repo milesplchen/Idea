@@ -458,8 +458,8 @@ public class DbConn {
 	 * @return 以小括號包住、以逗號分隔的字串
 	 */
 	public static String toSqlInClause(Set<String> s) {
-		if (s == null || s.isEmpty())
-			return null;
+		if (s == null)
+			return "(NULL)";
 		return toSqlInClause(s.toArray(new String[s.size()]));
 	}
 
@@ -470,8 +470,8 @@ public class DbConn {
 	 * @return 以小括號包住、以逗號分隔的字串
 	 */
 	public static String toSqlInClause(String[] s) {
-		if (s == null)
-			return null;
+		if (s == null || s.length == 0)
+			return "(NULL)";
 
 		StringBuilder sb = new StringBuilder("(");
 
