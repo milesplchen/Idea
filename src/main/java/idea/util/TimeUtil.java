@@ -15,6 +15,12 @@ import java.text.*;
  * @author Miles Chen
  */
 public class TimeUtil {
+	/** 一秒有幾毫秒. */
+	public final static long SECOND = 1000;
+	/** 一分有幾毫秒. */
+	public final static long MINUTE = 60 * 1000;
+	/** 一小時有幾毫秒. */
+	public final static long HOUR = 60 * MINUTE;
 	/** 一天有幾毫秒. */
 	public final static long DAY = 24 * 60 * 60 * 1000;
 	/** 一周有幾毫秒. */
